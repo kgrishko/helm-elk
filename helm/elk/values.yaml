@@ -3,7 +3,7 @@ global:
     pullPolicy: Always
   volumes:
     keep: false
-  storageClassName: AzureDisk
+  storageClassName: local-storage
 es:
   replicaCount: 
     master: 3
@@ -37,12 +37,12 @@ es:
       nodePort: 30011
   volumes:
     master:
-      storageClassName: AzureDisk
+      storageClassName: local-storage
       accessModes: ReadWriteOnce
       size: 4Gi
       mountPath: /usr/share/elasticsearch/data
     data:
-      storageClassName: AzureDisk
+      storageClassName: local-storage
       accessModes: ReadWriteOnce
       size: 10Gi
       mountPath: /usr/share/elasticsearch/data
