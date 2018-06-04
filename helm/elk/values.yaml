@@ -1,0 +1,82 @@
+global:
+  image:
+    pullPolicy: Always
+  volumes:
+    keep: false
+  storageClassName: AzureDisk
+es:
+  replicaCount: 
+    master: 3
+    data: 2
+    coordinator: 2
+  heapSize:
+    master: 1g
+    data: 4g
+    coordinator: 2g
+  image:
+    repository: elastic/elasticsearch
+    tag: 6.2.4
+  service:
+    master:
+      name: es-discovery
+      type: ClusterIP
+      externalTransportPort: 9300
+      internalTransportPort: 9300
+    data:
+      name: es-data
+      type: ClusterIP
+      externalTransportPort: 9300
+      internalTransportPort: 9300
+    coordinator:
+      name: es-coordinator
+      type: ClusterIP
+      externalApiPort: 9200
+      internalApiPort: 9200
+      externalTransportPort: 9300
+      internalTransportPort: 9300
+      nodePort: 30011
+  volumes:
+    master:
+      storageClassName: AzureDisk
+      accessModes: ReadWriteOnce
+      size: 4Gi
+      mountPath: /usr/share/elasticsearch/data
+    data:
+      storageClassName: AzureDisk
+      accessModes: ReadWriteOnce
+      size: 10Gi
+      mountPath: /usr/share/elasticsearch/data
+  cluster:
+    name: elk
+    env:
+      # IMPORTANT: https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#minimum_master_nodes
+      # To prevent data loss, it is vital to configure the discovery.zen.minimum_master_nodes setting so that each master-eligible
+      # node knows the minimum number of master-eligible nodes that must be visible in order to form a cluster.
+      MINIMUM_MASTER_NODES: "2"
+filebeat:
+  image:
+    repository: docker.elastic.co/beats/filebeat
+    tag: 6.2.4
+logstash:
+  enabled: false
+  replicaCount: 1
+  image:
+    repository: elastic/logstash
+    tag: 6.2.4
+  service:
+    name: logstash
+    type: ClusterIP
+    externalPort: 5044
+    internalPort: 5044
+kibana:
+  replicaCount: 1
+  image:
+    repository: elastic/kibana
+    tag: 6.2.4
+  service:
+    name: kibana
+    type: NodePort
+    externalPort: 5601
+    internalPort: 5601
+    nodePort: 30061
+selectPort: true
