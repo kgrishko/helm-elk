@@ -3,7 +3,7 @@ global:
     pullPolicy: Always
   volumes:
     keep: false
-  storageClassName: StorageOS
+  storageClassName: nfs
 es:
   replicaCount: 
     master: 3
@@ -37,12 +37,12 @@ es:
       nodePort: 30011
   volumes:
     master:
-      storageClassName: StorageOS
+      storageClassName: nfs
       accessModes: ReadWriteOnce
       size: 4Gi
       mountPath: /usr/share/elasticsearch/data
     data:
-      storageClassName: StorageOS
+      storageClassName: nfs
       accessModes: ReadWriteOnce
       size: 10Gi
       mountPath: /usr/share/elasticsearch/data
