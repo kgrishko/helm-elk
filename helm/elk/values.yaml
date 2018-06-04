@@ -3,7 +3,7 @@ global:
     pullPolicy: Always
   volumes:
     keep: false
-  storageClassName: nfs
+  storageClassName: rdb
 es:
   replicaCount: 
     master: 3
@@ -37,12 +37,12 @@ es:
       nodePort: 30011
   volumes:
     master:
-      storageClassName: nfs
+      storageClassName: rdb
       accessModes: ReadWriteOnce
       size: 4Gi
       mountPath: /usr/share/elasticsearch/data
     data:
-      storageClassName: nfs
+      storageClassName: rdb
       accessModes: ReadWriteOnce
       size: 10Gi
       mountPath: /usr/share/elasticsearch/data
@@ -58,7 +58,7 @@ filebeat:
     repository: docker.elastic.co/beats/filebeat
     tag: 6.2.4
 logstash:
-  enabled: false
+  enabled: true
   replicaCount: 1
   image:
     repository: elastic/logstash
