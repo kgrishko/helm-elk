@@ -22,9 +22,20 @@ spec:
       labels:
 {{ include "labels.esData" . | indent 8 }}
     spec:
-      volumeMounts:
-      - mountPath: /usr/share/elasticsearch/data
-        name: data
+      initContainers:
+      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html
+      # and https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration-memory.html#mlockall
+      - name: chown
+        image: {{ .Values.es.image.repository }}:{{ .Values.es.image.tag }}
+        imagePullPolicy: {{ .Values.global.image.pullPolicy | quote }}
+        command:
+        - bash
+        - -c
+        - chown elasticsearch:elasticsearch /usr/share/elasticsearch/data &&
+          chown elasticsearch:elasticsearch /usr/share/elasticsearch/logs
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: data
       containers:
       - name: es-data
         image: {{ .Values.es.image.repository }}:{{ .Values.es.image.tag }}
