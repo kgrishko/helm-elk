@@ -22,25 +22,6 @@ spec:
       labels:
 {{ include "labels.esData" . | indent 8 }}
     spec:
-    initContainers:
-      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html
-      # and https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration-memory.html#mlockall
-      - name: "sysctl"
-      securityContext:
-          privileged: true
-        image: "busybox"
-        imagePullPolicy: "Always"
-        command: ["sysctl", "-w", "vm.max_map_count=262144"]
-      - name: "chown"
-      securityContext:
-          privileged: true
-        image: {{ .Values.es.image.repository }}:{{ .Values.es.image.tag }}
-        imagePullPolicy: {{ .Values.global.image.pullPolicy | quote }}
-        command:
-        - bash
-        - -c
-        - chown elasticsearch:elasticsearch /usr/share/elasticsearch/data &&
-          chown elasticsearch:elasticsearch /usr/share/elasticsearch/logs
       volumeMounts:
       - mountPath: /usr/share/elasticsearch/data
         name: data
