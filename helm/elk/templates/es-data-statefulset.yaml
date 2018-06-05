@@ -22,9 +22,9 @@ spec:
       labels:
 {{ include "labels.esData" . | indent 8 }}
     spec:
-        volumeMounts:
-        - mountPath: /usr/share/elasticsearch/data
-          name: data
+    volumeMounts:
+      - mountPath: /usr/share/elasticsearch/data
+        name: data
       containers:
       - name: es-data
         image: {{ .Values.es.image.repository }}:{{ .Values.es.image.tag }}
