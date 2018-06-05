@@ -58,7 +58,7 @@ filebeat:
     repository: docker.elastic.co/beats/filebeat
     tag: 6.2.4
 logstash:
-  enabled: true
+  enabled: false
   replicaCount: 1
   image:
     repository: elastic/logstash
