@@ -22,7 +22,6 @@ spec:
       labels:
 {{ include "labels.esData" . | indent 8 }}
     spec:
-      initContainers:
         volumeMounts:
         - mountPath: /usr/share/elasticsearch/data
           name: data
