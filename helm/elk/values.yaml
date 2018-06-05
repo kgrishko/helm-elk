@@ -40,12 +40,12 @@ es:
       storageClassName: nfs-provisioner
       accessModes: ReadWriteOnce
       size: 4Gi
-      mountPath: /home/kubernetes/nfs/
+      mountPath: /export
     data:
       storageClassName: nfs-provisioner
       accessModes: ReadWriteOnce
       size: 5Gi
-      mountPath: /home/kubernetes/nfs/
+      mountPath: /export
   cluster:
     name: elk
     env:
@@ -58,7 +58,7 @@ filebeat:
     repository: docker.elastic.co/beats/filebeat
     tag: 6.2.4
 logstash:
-  enabled: false
+  enabled: true
   replicaCount: 1
   image:
     repository: elastic/logstash
