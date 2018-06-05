@@ -3,7 +3,7 @@ global:
     pullPolicy: Always
   volumes:
     keep: false
-  storageClassName: nfs
+  storageClassName: nfs-provisioner 
 es:
   replicaCount: 
     master: 3
@@ -37,15 +37,15 @@ es:
       nodePort: 30011
   volumes:
     master:
-      storageClassName: nfs
+      storageClassName: nfs-provisioner
       accessModes: ReadWriteOnce
       size: 4Gi
-      mountPath: /usr/share/elasticsearch/data
+      mountPath: /export
     data:
-      storageClassName: nfs
+      storageClassName: nfs-provisioner
       accessModes: ReadWriteOnce
-      size: 10Gi
-      mountPath: /usr/share/elasticsearch/data
+      size: 5Gi
+      mountPath: /export
   cluster:
     name: elk
     env:
