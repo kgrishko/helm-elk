@@ -28,17 +28,17 @@ spec:
       - name: "sysctl"
         image: "busybox"
         imagePullPolicy: "Always"
-        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+      #  command: ["sysctl", "-w", "vm.max_map_count=262144"]
         securityContext:
           privileged: true
       - name: chown
         image: {{ .Values.es.image.repository }}:{{ .Values.es.image.tag }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy | quote }}
-        command:
-        - bash
-        - -c
-        - chown elasticsearch:elasticsearch /usr/share/elasticsearch/data &&
-          chown elasticsearch:elasticsearch /usr/share/elasticsearch/logs
+      #  command:
+      #  - bash
+      #  - -c
+      #  - chown elasticsearch:elasticsearch /usr/share/elasticsearch/data &&
+      #    chown elasticsearch:elasticsearch /usr/share/elasticsearch/logs
         volumeMounts:
         - mountPath: /usr/share/elasticsearch/data
           name: data
