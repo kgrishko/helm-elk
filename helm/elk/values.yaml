@@ -40,12 +40,12 @@ es:
       storageClassName: nfs-provisioner
       accessModes: ReadWriteOnce
       size: 4Gi
-      mountPath: /export
+      mountPath: /home/kubernetes/nfs/
     data:
       storageClassName: nfs-provisioner
       accessModes: ReadWriteOnce
       size: 5Gi
-      mountPath: /export
+      mountPath: /home/kubernetes/nfs/
   cluster:
     name: elk
     env:
