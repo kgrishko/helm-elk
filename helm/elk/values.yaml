@@ -78,5 +78,5 @@ kibana:
     type: NodePort
     externalPort: 5601
     internalPort: 5601
-    nodePort: 31061
+    nodePort: 30061
 selectPort: true
