@@ -3,12 +3,12 @@ global:
     pullPolicy: Always
   volumes:
     keep: false
-  storageClassName: nfs-provisioner-demo
+  storageClassName: nfs-server
 es:
   replicaCount: 
-    master: 2
-    data: 2
-    coordinator: 2
+    master: 1
+    data: 1
+    coordinator: 1
   heapSize:
     master: 128m
     data: 512m
@@ -37,14 +37,14 @@ es:
       nodePort: 30011
   volumes:
     master:
-      storageClassName: nfs-provisioner-demo
+      storageClassName: nfs-server
       accessModes: ReadWriteOnce
-      size: 4Gi
+      size: 8Gi
       mountPath: /export
     data:
-      storageClassName: nfs-provisioner-demo
+      storageClassName: nfs-server
       accessModes: ReadWriteOnce
-      size: 5Gi
+      size: 8Gi
       mountPath: /export
   cluster:
     name: elk
