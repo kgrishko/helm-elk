@@ -6,13 +6,13 @@ global:
   storageClassName: nfs-provisioner 
 es:
   replicaCount: 
-    master: 3
+    master: 2
     data: 2
     coordinator: 2
   heapSize:
-    master: 1g
-    data: 4g
-    coordinator: 2g
+    master: 128m
+    data: 1024m
+    coordinator: 128m
   image:
     repository: elastic/elasticsearch
     tag: 6.2.4
