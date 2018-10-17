@@ -11,7 +11,7 @@ es:
     coordinator: 1
   heapSize:
     master: 128m
-    data: 512m
+    data: 1024m
     coordinator: 128m
   image:
     repository: elastic/elasticsearch
