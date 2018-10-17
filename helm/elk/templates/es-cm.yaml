@@ -23,7 +23,7 @@ data:
     discovery:
       zen:
         ping.unicast.hosts: ["{{ .Values.es.service.master.name }}"]
-        minimum_master_nodes: ${MINIMUM_MASTER_NODES:2}
+        minimum_master_nodes: ${MINIMUM_MASTER_NODES:1}
 
     # see https://www.elastic.co/guide/en/x-pack/current/xpack-settings.html
     xpack.ml.enabled: ${XPACK_ML_ENABLED:false}
