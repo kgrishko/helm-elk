@@ -3,7 +3,7 @@ global:
     pullPolicy: Always
   volumes:
     keep: false
-  storageClassName: nfs-provisioner 
+  storageClassName: nfs-provisioner-1
 es:
   replicaCount: 
     master: 1
@@ -37,12 +37,12 @@ es:
       nodePort: 30011
   volumes:
     master:
-      storageClassName: nfs-provisioner
+      storageClassName: nfs-provisioner-1
       accessModes: ReadWriteOnce
       size: 4Gi
       mountPath: /export
     data:
-      storageClassName: nfs-provisioner
+      storageClassName: nfs-provisioner-1
       accessModes: ReadWriteOnce
       size: 5Gi
       mountPath: /export
