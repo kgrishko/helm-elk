@@ -39,12 +39,12 @@ es:
     master:
       storageClassName: nfs-provisioner
       accessModes: ReadWriteOnce
-      size: 8Gi
+      size: 4Gi
       mountPath: /export
     data:
       storageClassName: nfs-provisioner
       accessModes: ReadWriteOnce
-      size: 8Gi
+      size: 5Gi
       mountPath: /export
   cluster:
     name: elk
